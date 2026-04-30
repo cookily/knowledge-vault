@@ -1,5 +1,8 @@
-# Claude Code 配置（不同步）
-.claude/
+# Claude Code 配置
+# 注意：.claude/skills/ 中的技能会被同步
+.claude/agents/
+.claude/commands/
+.claude/sessions/
 .claudian/
 
 # 系统文件
