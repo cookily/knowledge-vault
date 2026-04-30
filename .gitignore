@@ -14,3 +14,11 @@ Thumbs.db
 .obsidian/cache/
 .obsidian/workspace
 .obsidian/*.json
+
+# Graphify 缓存和临时文件（不提交）
+.graphify_*.json
+.graphify_*.txt
+.graphify_python
+
+# Graphify 输出（选择性同步）
+# graphify-out/cache/

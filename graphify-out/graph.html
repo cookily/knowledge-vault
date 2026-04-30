@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>graphify - graphify-out/graph.html</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
+  #search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
+  .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .search-item:hover { background: #2a2a4e; }
+  #info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: #e0e0e0; }
+  #info-content .empty { color: #555; font-style: italic; }
+  .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid #333; }
+  .neighbor-link:hover { background: #2a2a4e; }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
+  .legend-item:hover { background: #2a2a4e; padding-left: 4px; }
+  .legend-item.dimmed { opacity: 0.35; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count { color: #666; font-size: 11px; }
+  #stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
+  #legend-controls { display: flex; gap: 6px; margin-bottom: 8px; }
+  #legend-controls button { flex: 1; background: #0f0f1a; border: 1px solid #3a3a5e; color: #aaa; padding: 4px 0; border-radius: 4px; font-size: 11px; cursor: pointer; }
+  #legend-controls button:hover { border-color: #4E79A7; color: #e0e0e0; }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<div id="sidebar">
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="info-panel">
+    <h3>Node Info</h3>
+    <div id="info-content"><span class="empty">Click a node to inspect it</span></div>
+  </div>
+  <div id="legend-wrap">
+    <h3>Communities</h3>
+    <div id="legend-controls">
+      <button onclick="toggleAllCommunities(false)">Show All</button>
+      <button onclick="toggleAllCommunities(true)">Hide All</button>
+    </div>
+    <div id="legend"></div>
+  </div>
+  <div id="stats">42 nodes &middot; 45 edges &middot; 8 communities</div>
+</div>
+<script>
+const RAW_NODES = [{"id": "claude_code", "label": "Claude Code", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "Claude Code", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 13}, {"id": "obsidian", "label": "Obsidian", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 21.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Obsidian", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 5}, {"id": "claudian", "label": "Claudian", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "Claudian", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 2}, {"id": "graphify", "label": "graphify", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 19.2, "font": {"size": 12, "color": "#ffffff"}, "title": "graphify", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u7f51\u9875\u6587\u7ae0/graphify.md", "file_type": "document", "degree": 4}, {"id": "karpathy_ai_knowledge_base", "label": "Karpathy\u5f0fAI\u77e5\u8bc6\u5e93", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 21.5, "font": {"size": 12, "color": "#ffffff"}, "title": "Karpathy\u5f0fAI\u77e5\u8bc6\u5e93", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 5}, {"id": "skill_github", "label": "github Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "github Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_self_improving_agent", "label": "self-improving-agent Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "self-improving-agent Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_code_review", "label": "code-review Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "code-review Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_multi_search_engine", "label": "multi-search-engine Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "multi-search-engine Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_agent_browser", "label": "agent-browser Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "agent-browser Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_proactive_agent", "label": "proactive-agent Skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "proactive-agent Skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_dot_skill", "label": "dot-skill/colleague-skill", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "dot-skill/colleague-skill", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "skill_superpowers", "label": "superpowers Skill", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "superpowers Skill", "community": 6, "community_name": "Skills \u5f00\u53d1\u8005", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 2}, {"id": "skill_waza", "label": "waza Skill", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "waza Skill", "community": 7, "community_name": "\u8bed\u97f3\u8bc6\u522b", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 2}, {"id": "clawhub", "label": "ClawHub", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "ClawHub", "community": 0, "community_name": "Claude Code Skills", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "openclaw", "label": "OpenClaw", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 28.5, "font": {"size": 12, "color": "#ffffff"}, "title": "OpenClaw", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/Obsidian \u81ea\u52a8\u5316\u5de5\u4f5c\u6d41\u642d\u5efa\u8bb0\u5f55.md", "file_type": "document", "degree": 8}, {"id": "sherpa_onnx", "label": "sherpa-onnx\u79bb\u7ebf\u8bed\u97f3\u8bc6\u522b", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.9, "font": {"size": 12, "color": "#ffffff"}, "title": "sherpa-onnx\u79bb\u7ebf\u8bed\u97f3\u8bc6\u522b", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/QQBot-sherpa-onnx-\u79bb\u7ebf\u8bed\u97f3\u8bc6\u522b\u914d\u7f6e.md", "file_type": "document", "degree": 3}, {"id": "siliconflow", "label": "\u7845\u57fa\u6d41\u52a8\u8bed\u97f3\u8bc6\u522b", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "\u7845\u57fa\u6d41\u52a8\u8bed\u97f3\u8bc6\u522b", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/\u7845\u57fa\u6d41\u52a8\u8bed\u97f3\u8bc6\u522b\u63a5\u5165.md", "file_type": "document", "degree": 1}, {"id": "nvm", "label": "nvm Node\u7248\u672c\u7ba1\u7406", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "nvm Node\u7248\u672c\u7ba1\u7406", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8.md", "file_type": "document", "degree": 1}, {"id": "tavily", "label": "Tavily\u7f51\u7edc\u641c\u7d22", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "Tavily\u7f51\u7edc\u641c\u7d22", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/openclaw-cn\u5b89\u88c5\u7f51\u7edc\u641c\u7d22\u63d2\u4ef6openclaw-tavily\u5b89\u88c5\u914d\u7f6e-\u5df2\u5b9e\u8df5.md", "file_type": "document", "degree": 1}, {"id": "obsidian_web_clipper", "label": "Obsidian Web Clipper", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "Obsidian Web Clipper", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 1}, {"id": "brat", "label": "BRAT\u63d2\u4ef6\u7ba1\u7406\u5668", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "BRAT\u63d2\u4ef6\u7ba1\u7406\u5668", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 1}, {"id": "andrew_karpathy", "label": "Andrej Karpathy", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "Andrej Karpathy", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "document", "degree": 2}, {"id": "jesse_vincent", "label": "Jesse Vincent", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "Jesse Vincent", "community": 6, "community_name": "Skills \u5f00\u53d1\u8005", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "tw93", "label": "tw93", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "tw93", "community": 7, "community_name": "\u8bed\u97f3\u8bc6\u522b", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Claude Code \u795e\u7ea7\u5f00\u53d1\u8005 9 \u4e2a Skills \u63a8\u8350\uff1a\u522b\u4e71\u88c5\uff0c\u5148\u88c5\u8fd9\u51e0\u7c7b.md", "file_type": "document", "degree": 1}, {"id": "knowledge_graph", "label": "\u77e5\u8bc6\u56fe\u8c31", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "\u77e5\u8bc6\u56fe\u8c31", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u7f51\u9875\u6587\u7ae0/graphify.md", "file_type": "concept", "degree": 1}, {"id": "second_brain", "label": "\u7b2c\u4e8c\u5927\u8111", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "\u7b2c\u4e8c\u5927\u8111", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "concept", "degree": 1}, {"id": "llm_driven_knowledge_management", "label": "LLM\u9a71\u52a8\u77e5\u8bc6\u7ba1\u7406", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "LLM\u9a71\u52a8\u77e5\u8bc6\u7ba1\u7406", "community": 2, "community_name": "Karpathy \u77e5\u8bc6\u5e93", "source_file": "raw/external/\u5fae\u4fe1\u516c\u4f17\u53f7/Karpathy \u5f0f AI \u77e5\u8bc6\u5e93\u642d\u5efa\u6307\u5357\uff1a\u8ba9 Claude Code + Obsidian \u6210\u4e3a\u4f60\u7684\u7b2c\u4e8c\u5927\u8111 1.md", "file_type": "concept", "degree": 1}, {"id": "obsidian_automation", "label": "Obsidian\u81ea\u52a8\u5316\u5de5\u4f5c\u6d41", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 16.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Obsidian\u81ea\u52a8\u5316\u5de5\u4f5c\u6d41", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/personal/openclaw/Obsidian \u81ea\u52a8\u5316\u5de5\u4f5c\u6d41\u642d\u5efa\u8bb0\u5f55.md", "file_type": "document", "degree": 3}, {"id": "obsidian_cli", "label": "obsidian-cli", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "obsidian-cli", "community": 3, "community_name": "Obsidian \u751f\u6001", "source_file": "raw/personal/openclaw/Obsidian \u81ea\u52a8\u5316\u5de5\u4f5c\u6d41\u642d\u5efa\u8bb0\u5f55.md", "file_type": "code", "degree": 1}, {"id": "qqbot", "label": "QQBot", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "QQBot", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/QQBot-sherpa-onnx-\u79bb\u7ebf\u8bed\u97f3\u8bc6\u522b\u914d\u7f6e.md", "file_type": "document", "degree": 2}, {"id": "feishu_sherpa", "label": "\u98de\u4e66sherpa-onnx\u914d\u7f6e", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "\u98de\u4e66sherpa-onnx\u914d\u7f6e", "community": 1, "community_name": "OpenClaw \u914d\u7f6e", "source_file": "raw/personal/openclaw/\u98de\u4e66sherpa-onnx\u79bb\u7ebf\u8bed\u97f3\u8bc6\u522b\u914d\u7f6e.md", "file_type": "document", "degree": 2}, {"id": "nvm_nodemanager", "label": "NVM (Node Version Manager)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "NVM (Node Version Manager)", "community": 4, "community_name": "NVM Node.js", "source_file": "raw/personal/openclaw/assets/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8/Pasted image 20260327115740.png", "file_type": "image", "degree": 2}, {"id": "nodejs_installation", "label": "Node.js Installation", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "Node.js Installation", "community": 4, "community_name": "NVM Node.js", "source_file": "raw/personal/openclaw/assets/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8/Pasted image 20260327115740.png", "file_type": "image", "degree": 1}, {"id": "d_drive", "label": "D: Drive (Non-default Location)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "D: Drive (Non-default Location)", "community": 4, "community_name": "NVM Node.js", "source_file": "raw/personal/openclaw/assets/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8/Pasted image 20260327115740.png", "file_type": "image", "degree": 1}, {"id": "c_drive_default", "label": "C: Drive (Default Location)", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "C: Drive (Default Location)", "community": 4, "community_name": "NVM Node.js", "source_file": "raw/personal/openclaw/assets/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8/Pasted image 20260327115740.png", "file_type": "image", "degree": 1}, {"id": "installation_location_config", "label": "Installation Location Configuration", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.9, "font": {"size": 12, "color": "#ffffff"}, "title": "Installation Location Configuration", "community": 4, "community_name": "NVM Node.js", "source_file": "raw/personal/openclaw/assets/nvm\u5b89\u88c5\u7684node\u6539\u5230D\u76d8\uff0c\u9ed8\u8ba4\u662f\u5728c\u76d8/Pasted image 20260327115740.png", "file_type": "image", "degree": 3}, {"id": "openclaw_devices_list", "label": "openclaw devices list command output", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "openclaw devices list command output", "community": 5, "community_name": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "source_file": "raw/personal/openclaw/assets/openclaw\u53ec\u5524\u5b50\u4ee3\u7406\u62a5\u95191008\uff0c\u9700\u8981\u914d\u5bf9\u95ee\u98981008\uff1a pairing required/Pasted image 20260415085636.png", "file_type": "image", "degree": 2}, {"id": "error_1008_pairing_required", "label": "Error 1008 Pairing Required", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 19.2, "font": {"size": 12, "color": "#ffffff"}, "title": "Error 1008 Pairing Required", "community": 5, "community_name": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "source_file": "raw/personal/openclaw/openclaw\u53ec\u5524\u5b50\u4ee3\u7406\u62a5\u95191008\uff0c\u9700\u8981\u914d\u5bf9\u95ee\u98981008\uff1a pairing required.md", "file_type": "document", "degree": 4}, {"id": "openclaw_devices_approve", "label": "openclaw devices approve command", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "openclaw devices approve command", "community": 5, "community_name": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "source_file": "raw/personal/openclaw/openclaw\u53ec\u5524\u5b50\u4ee3\u7406\u62a5\u95191008\uff0c\u9700\u8981\u914d\u5bf9\u95ee\u98981008\uff1a pairing required.md", "file_type": "document", "degree": 1}, {"id": "openclaw_gateway_restart", "label": "openclaw gateway restart command", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 12.3, "font": {"size": 0, "color": "#ffffff"}, "title": "openclaw gateway restart command", "community": 5, "community_name": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "source_file": "raw/personal/openclaw/openclaw\u53ec\u5524\u5b50\u4ee3\u7406\u62a5\u95191008\uff0c\u9700\u8981\u914d\u5bf9\u95ee\u98981008\uff1a pairing required.md", "file_type": "document", "degree": 1}, {"id": "device_entry", "label": "Device Entry", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 14.6, "font": {"size": 12, "color": "#ffffff"}, "title": "Device Entry", "community": 5, "community_name": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "source_file": "raw/personal/openclaw/assets/openclaw\u53ec\u5524\u5b50\u4ee3\u7406\u62a5\u95191008\uff0c\u9700\u8981\u914d\u5bf9\u95ee\u98981008\uff1a pairing required/Pasted image 20260415085636.png", "file_type": "image", "degree": 2}];
+const RAW_EDGES = [{"from": "claude_code", "to": "skill_github", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_self_improving_agent", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_code_review", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_multi_search_engine", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_agent_browser", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_proactive_agent", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_dot_skill", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_superpowers", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "skill_waza", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "clawhub", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "claudian", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "karpathy_ai_knowledge_base", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "claude_code", "to": "graphify", "label": "implements", "title": "implements [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian", "to": "claudian", "label": "implements", "title": "implements [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian", "to": "obsidian_web_clipper", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian", "to": "brat", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian", "to": "karpathy_ai_knowledge_base", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian", "to": "obsidian_automation", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "graphify", "to": "openclaw", "label": "implements", "title": "implements [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "graphify", "to": "knowledge_graph", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "graphify", "to": "andrew_karpathy", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "karpathy_ai_knowledge_base", "to": "llm_driven_knowledge_management", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "karpathy_ai_knowledge_base", "to": "andrew_karpathy", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "karpathy_ai_knowledge_base", "to": "second_brain", "label": "conceptually_related_to", "title": "conceptually_related_to [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "skill_superpowers", "to": "jesse_vincent", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "skill_waza", "to": "tw93", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw", "to": "tavily", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw", "to": "sherpa_onnx", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw", "to": "siliconflow", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw", "to": "nvm", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "openclaw", "to": "qqbot", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "openclaw", "to": "feishu_sherpa", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "openclaw", "to": "obsidian_automation", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "sherpa_onnx", "to": "qqbot", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "sherpa_onnx", "to": "feishu_sherpa", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "obsidian_automation", "to": "obsidian_cli", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "nvm_nodemanager", "to": "nodejs_installation", "label": "manages", "title": "manages [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "nvm_nodemanager", "to": "installation_location_config", "label": "configures", "title": "configures [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "d_drive", "to": "installation_location_config", "label": "specifies", "title": "specifies [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "c_drive_default", "to": "installation_location_config", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw_devices_list", "to": "device_entry", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "openclaw_devices_list", "to": "error_1008_pairing_required", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "error_1008_pairing_required", "to": "openclaw_devices_approve", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "error_1008_pairing_required", "to": "openclaw_gateway_restart", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "error_1008_pairing_required", "to": "device_entry", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}];
+const LEGEND = [{"cid": 0, "color": "#4E79A7", "label": "Claude Code Skills", "count": 9}, {"cid": 1, "color": "#F28E2B", "label": "OpenClaw \u914d\u7f6e", "count": 7}, {"cid": 2, "color": "#E15759", "label": "Karpathy \u77e5\u8bc6\u5e93", "count": 6}, {"cid": 3, "color": "#76B7B2", "label": "Obsidian \u751f\u6001", "count": 6}, {"cid": 4, "color": "#59A14F", "label": "NVM Node.js", "count": 5}, {"cid": 5, "color": "#EDC948", "label": "OpenClaw \u8bbe\u5907\u914d\u5bf9", "count": 5}, {"cid": 6, "color": "#B07AA1", "label": "Skills \u5f00\u53d1\u8005", "count": 2}, {"cid": 7, "color": "#FF9DA7", "label": "\u8bed\u97f3\u8bc6\u522b", "count": 2}];
+
+// HTML-escape helper — prevents XSS when injecting graph data into innerHTML
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build vis datasets
+const nodesDS = new vis.DataSet(RAW_NODES.map(n => ({
+  id: n.id, label: n.label, color: n.color, size: n.size,
+  font: n.font, title: n.title,
+  _community: n.community, _community_name: n.community_name,
+  _source_file: n.source_file, _file_type: n.file_type, _degree: n.degree,
+})));
+
+const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
+  id: i, from: e.from, to: e.to,
+  label: '',
+  title: e.title,
+  dashes: e.dashes,
+  width: e.width,
+  color: e.color,
+  arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+})));
+
+const container = document.getElementById('graph');
+const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -60,
+      centralGravity: 0.005,
+      springLength: 120,
+      springConstant: 0.08,
+      damping: 0.4,
+      avoidOverlap: 0.8,
+    },
+    stabilization: { iterations: 200, fit: true },
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 100,
+    hideEdgesOnDrag: true,
+    navigationButtons: false,
+    keyboard: false,
+  },
+  nodes: { shape: 'dot', borderWidth: 1.5 },
+  edges: { smooth: { type: 'continuous', roundness: 0.2 }, selectionWidth: 3 },
+});
+
+network.once('stabilizationIterationsDone', () => {
+  network.setOptions({ physics: { enabled: false } });
+});
+
+function showInfo(nodeId) {
+  const n = nodesDS.get(nodeId);
+  if (!n) return;
+  const neighborIds = network.getConnectedNodes(nodeId);
+  const neighborItems = neighborIds.map(nid => {
+    const nb = nodesDS.get(nid);
+    const color = nb ? nb.color.background : '#555';
+    return `<span class="neighbor-link" style="border-left-color:${esc(color)}" onclick="focusNode(${JSON.stringify(nid)})">${esc(nb ? nb.label : nid)}</span>`;
+  }).join('');
+  document.getElementById('info-content').innerHTML = `
+    <div class="field"><b>${esc(n.label)}</b></div>
+    <div class="field">Type: ${esc(n._file_type || 'unknown')}</div>
+    <div class="field">Community: ${esc(n._community_name)}</div>
+    <div class="field">Source: ${esc(n._source_file || '-')}</div>
+    <div class="field">Degree: ${n._degree}</div>
+    ${neighborIds.length ? `<div class="field" style="margin-top:8px;color:#aaa;font-size:11px">Neighbors (${neighborIds.length})</div><div id="neighbors-list">${neighborItems}</div>` : ''}
+  `;
+}
+
+function focusNode(nodeId) {
+  network.focus(nodeId, { scale: 1.4, animation: true });
+  network.selectNodes([nodeId]);
+  showInfo(nodeId);
+}
+
+// Track hovered node — hover detection is more reliable than click params
+let hoveredNodeId = null;
+network.on('hoverNode', params => {
+  hoveredNodeId = params.node;
+  container.style.cursor = 'pointer';
+});
+network.on('blurNode', () => {
+  hoveredNodeId = null;
+  container.style.cursor = 'default';
+});
+container.addEventListener('click', () => {
+  if (hoveredNodeId !== null) {
+    showInfo(hoveredNodeId);
+    network.selectNodes([hoveredNodeId]);
+  }
+});
+network.on('click', params => {
+  if (params.nodes.length > 0) {
+    showInfo(params.nodes[0]);
+  } else if (hoveredNodeId === null) {
+    document.getElementById('info-content').innerHTML = '<span class="empty">Click a node to inspect it</span>';
+  }
+});
+
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = RAW_NODES.filter(n => n.label.toLowerCase().includes(q)).slice(0, 20);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  matches.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'search-item';
+    el.textContent = n.label;
+    el.style.borderLeft = `3px solid ${n.color.background}`;
+    el.style.paddingLeft = '8px';
+    el.onclick = () => {
+      network.focus(n.id, { scale: 1.5, animation: true });
+      network.selectNodes([n.id]);
+      showInfo(n.id);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    };
+    searchResults.appendChild(el);
+  });
+});
+document.addEventListener('click', e => {
+  if (!searchResults.contains(e.target) && e.target !== searchInput)
+    searchResults.style.display = 'none';
+});
+
+const hiddenCommunities = new Set();
+
+function toggleAllCommunities(hide) {
+  document.querySelectorAll('.legend-item').forEach(item => {
+    hide ? item.classList.add('dimmed') : item.classList.remove('dimmed');
+  });
+  LEGEND.forEach(c => {
+    if (hide) hiddenCommunities.add(c.cid); else hiddenCommunities.delete(c.cid);
+  });
+  const updates = RAW_NODES.map(n => ({ id: n.id, hidden: hide }));
+  nodesDS.update(updates);
+}
+
+const legendEl = document.getElementById('legend');
+LEGEND.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>
+    <span class="legend-label">${c.label}</span>
+    <span class="legend-count">${c.count}</span>`;
+  item.onclick = () => {
+    if (hiddenCommunities.has(c.cid)) {
+      hiddenCommunities.delete(c.cid);
+      item.classList.remove('dimmed');
+    } else {
+      hiddenCommunities.add(c.cid);
+      item.classList.add('dimmed');
+    }
+    const updates = RAW_NODES
+      .filter(n => n.community === c.cid)
+      .map(n => ({ id: n.id, hidden: hiddenCommunities.has(c.cid) }));
+    nodesDS.update(updates);
+  };
+  legendEl.appendChild(item);
+});
+</script>
+<script>
+// Render hyperedges as shaded regions
+const hyperedges = [{"id": "skill_categories", "label": "Claude Code Skills\u5206\u7c7b", "nodes": ["skill_github", "skill_self_improving_agent", "skill_code_review", "skill_multi_search_engine", "skill_agent_browser", "skill_proactive_agent", "skill_dot_skill", "skill_superpowers", "skill_waza"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0}, {"id": "three_skill_categories", "label": "Skills\u4e09\u5927\u7c7b\u522b", "nodes": ["skill_github", "skill_multi_search_engine", "skill_proactive_agent"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 1.0}, {"id": "karpathy_system_components", "label": "Karpathy\u77e5\u8bc6\u5e93\u7cfb\u7edf\u7ec4\u4ef6", "nodes": ["obsidian", "claude_code", "claudian", "obsidian_web_clipper"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 1.0}, {"id": "openclaw_stt_providers", "label": "OpenClaw\u8bed\u97f3\u8bc6\u522b\u65b9\u6848", "nodes": ["sherpa_onnx", "siliconflow", "tavily"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0}, {"id": "graphify_supported_platforms", "label": "graphify\u652f\u6301\u5e73\u53f0", "nodes": ["claude_code", "openclaw"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0}];
+// afterDrawing passes ctx already transformed to network coordinate space.
+// Draw node positions raw — no manual pan/zoom/DPR math needed.
+network.on('afterDrawing', function(ctx) {
+    hyperedges.forEach(h => {
+        const positions = h.nodes
+            .map(nid => network.getPositions([nid])[nid])
+            .filter(p => p !== undefined);
+        if (positions.length < 2) return;
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = '#6366f1';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Centroid and expanded hull in network coordinates
+        const cx = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+        const cy = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+        const expanded = positions.map(p => ({
+            x: cx + (p.x - cx) * 1.15,
+            y: cy + (p.y - cy) * 1.15
+        }));
+        ctx.moveTo(expanded[0].x, expanded[0].y);
+        expanded.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        // Label
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#4f46e5';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(h.label, cx, cy - 5);
+        ctx.restore();
+    });
+});
+</script>
+</body>
+</html>
