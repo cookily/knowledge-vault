@@ -1,0 +1,16 @@
+# Claude Code 配置（不同步）
+.claude/
+.claudian/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.log
+
+# Obsidian 本地缓存（保留配置但排除缓存）
+.obsidian/cache/
+.obsidian/workspace
+.obsidian/*.json
