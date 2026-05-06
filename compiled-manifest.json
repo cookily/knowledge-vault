@@ -1,0 +1,101 @@
+{
+  "_comment": "compiled manifest",
+  "_version": "1.0",
+  "entries": {
+    "raw\\external\\微信公众号\\Claude Code 神级开发者 9 个 Skills 推荐：别乱装，先装这几类.md": {
+      "summary": "wiki/summaries/Claude Code 神级开发者 9 个 Skills 推荐.md",
+      "hash": "f9a68c7036f2d95d",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\网页文章\\graphify.md": {
+      "summary": "wiki/summaries/graphify.md",
+      "hash": "322d53189ab67b3a",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\微信公众号\\Karpathy 式 AI 知识库搭建指南：让 Claude Code + Obsidian 成为你的第二大脑 1.md": {
+      "summary": "wiki/summaries/Karpathy 式 AI 知识库搭建指南.md",
+      "hash": "3c0db9e009931683",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\网页文章\\Obsidian × Claudian × Skills：打造真正会“思考”的个人知识库-阿里云开发者社区.md": {
+      "summary": "wiki/summaries/Obsidian × Claudian × Skills.md",
+      "hash": "7a4e588e658b77e6",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\QQBot-sherpa-onnx-离线语音识别配置.md": {
+      "summary": "wiki/summaries/QQBot离线语音识别配置.md",
+      "hash": "4c1a1f40d6de2750",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\微信公众号\\一行命令把杂乱文件变成知识图谱——我的知识库搭建流程.md": {
+      "summary": "wiki/summaries/一行命令把杂乱文件变成知识图谱.md",
+      "hash": "89312b2fc7effd74",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\飞书sherpa-onnx离线语音识别配置.md": {
+      "summary": "wiki/summaries/飞书sherpa-onnx离线语音识别配置.md",
+      "hash": "f3fdde49dfc84957",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\Obsidian 自动化工作流搭建记录.md": {
+      "summary": "wiki/summaries/Obsidian-自动化工作流搭建记录.md",
+      "hash": "3f9323287459b5cd",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\openclaw-cn安装网络搜索mcp-已实践.md": {
+      "summary": "wiki/summaries/OpenClaw-网络搜索MCP配置.md",
+      "hash": "312bd76c28902606",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\openclaw-cn安装网络搜索插件openclaw-tavily安装配置-已实践.md": {
+      "summary": "wiki/summaries/OpenClaw-Tavily插件安装.md",
+      "hash": "9d067e196bf4cdde",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\openclaw局域网nas可以访问配置-已实践.md": {
+      "summary": "wiki/summaries/OpenClaw-NAS访问配置.md",
+      "hash": "c4b44be1be2f4f7e",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\openclaw召唤子代理报错1008，需要配对问题1008： pairing required.md": {
+      "summary": "wiki/summaries/OpenClaw-设备配对.md",
+      "hash": "ad24a24631570c0c",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\openclaw卸载.md": {
+      "summary": "wiki/summaries/OpenClaw-卸载.md",
+      "hash": "d84c88c725b5475c",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\本机访问远端的服务器openclaw.md": {
+      "summary": "wiki/summaries/SSH隧道访问OpenClaw.md",
+      "hash": "6511569943f35938",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\nvm安装的node改到D盘，默认是在c盘.md": {
+      "summary": "wiki/summaries/nvm-Node目录迁移.md",
+      "hash": "34a61d75dfe9f440",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\微信公众号\\GitHub 11 万 Star 的 AI Agent，终于有 Web 可视化界面了！.md": {
+      "summary": "wiki/summaries/Hermes Agent 与 Web UI 可视化界面.md",
+      "hash": "96752d88e9cd6fc2",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\微信公众号\\Claude Code、Cursor 和 Codex，到底选哪个？.md": {
+      "summary": "wiki/summaries/Claude Code vs Cursor vs Codex.md",
+      "hash": "22defae3cdc9df6f",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\external\\微信公众号\\从Alibaba-Cola到DDD，一线研发对领域驱动的思考.md": {
+      "summary": "wiki/summaries/DDD领域驱动设计实战.md",
+      "hash": "c89c4a8149631433",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    },
+    "raw\\personal\\openclaw\\硅基流动语音识别接入.md": {
+      "summary": "wiki/summaries/OpenClaw-语音识别配置.md",
+      "hash": "54bbe822b11948e3",
+      "compiled_at": "2026-05-06T07:31:53.753789+00:00"
+    }
+  }
+}
