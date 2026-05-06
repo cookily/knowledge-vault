@@ -6,7 +6,7 @@ created: 2026-04-30
 
 # All Sources - 知识库原始资料索引
 
-> 📁 最后更新：2026-04-30
+> 📁 最后更新：2026-05-06
 > 💡 使用 [[概念/知识库编译流程]] 进行整理
 
 ---
@@ -26,6 +26,8 @@ created: 2026-04-30
 | [[Hermes Agent 与 Web UI 可视化界面]] | 微信公众号 | #clippings | Hermes Agent（11万 Star）配 Web UI 可视化界面，高频用户从敲命令变点鼠标 |
 | [[DDD领域驱动设计实战]] | 微信公众号 | #clippings | DDD 落地核心是知道代码放哪层，Cola 架构分层模板实战 |
 | [[graphify知识图谱实战]] | 微信公众号 | #clippings | /graphify 一行命令生成知识图谱，两轮提取（AST + 语义），不需要提前分类 |
+| [[一行命令把杂乱文件变成知识图谱]] | 微信公众号 | #clippings | graphify 安装与实战：两轮提取 + Leiden 聚类，Token 降低 71.5 倍 |
+| [[Claude Code vs Cursor vs Codex]] | 微信公众号 | #clippings | 三款工具对比：Cursor 做手、Claude Code 做脑、Codex 做腿，$120 组合最优 |
 | [[QQBot离线语音识别配置]] | 个人笔记 | #personal | QQBot + sherpa-onnx 离线语音识别配置，实测可用 |
 | [[nvm-Node目录迁移]] | 个人笔记 | #personal | 修改 settings.txt 将 nvm 的 node 版本存储位置从 C 盘迁移到 D 盘 |
 | [[测试编译技能]] | 微信公众号 | #test | /compile 技能测试文件 |
@@ -52,8 +54,8 @@ created: 2026-04-30
 
 ## 📊 统计信息
 
-- **总来源数**：4（外部）+ 11（个人）
-- **最近添加**：2026-04-30
+- **总来源数**：8（外部）+ 11（个人）= 19
+- **最近添加**：2026-05-06
 - **分类**：按添加日期分组
 
 ---
