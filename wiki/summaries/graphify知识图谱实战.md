@@ -69,6 +69,79 @@ graphify install         # 注册到 Claude Code
 
 **不适合**：替代人工思考和总结
 
+## 导出到外部工具
+
+graphify 支持将生成的图谱导出到专业图分析工具。
+
+### 导出到 Gephi
+
+Gephi 是一款开源图可视化软件，适合做社区分析、节点过滤、布局调优。
+
+**步骤：**
+1. 运行命令：
+   ```bash
+   /graphify <path> --graphml
+   ```
+2. 打开 `graphify-out/graph.graphml`
+3. 在 Gephi 中：
+   - 打开文件后在 **"概览"** 标签页调整布局（如 ForceAtlas2）
+   - 左侧 **"统计"** 面板可以跑模块度分析
+   - 节点颜色可以通过社区 ID 分组染色
+   - **"过滤"** 面板可以按置信度、关系类型筛选
+
+**优点**：免费、界面直观、适合做汇报图
+
+---
+
+### 导出到 Neo4j
+
+Neo4j 是一款图数据库，支持 Cypher 查询语言，适合做复杂分析。
+
+**方式一：生成 Cypher 文件，手动导入**
+```bash
+/graphify <path> --neo4j
+```
+生成 `graphify-out/cypher.txt`，然后在终端运行：
+```bash
+cypher-shell < graphify-out/cypher.txt
+```
+适用于没有本地 Neo4j 服务、需要导入到远程实例的场景。
+
+**方式二：直接推送到运行中的 Neo4j**
+```bash
+/graphify <path> --neo4j-push bolt://localhost:7687
+```
+首次运行会提示输入用户名和密码（默认用户名 `neo4j`）。
+
+> 推送使用 `MERGE` 语句，重复运行不会产生重复数据，可以安全重新导入。
+
+**导入后的常用查询：**
+```cypher
+-- 查看节点总数
+MATCH (n) RETURN count(n) AS 节点数
+
+-- 按社区统计节点数量
+MATCH (n) RETURN n.community AS 社区, count(n) AS 数量 ORDER BY 数量 DESC
+
+-- 查看高置信度边
+MATCH (a)-[r {confidence: "EXTRACTED"}]->(b) RETURN a.label, r.relation, b.label
+
+-- 找某个概念的所有直接邻居
+MATCH (n {label: "某个概念名"})-[r]-(neighbor) RETURN neighbor.label, r.relation
+```
+
+**优点**：支持 SQL 级别的复杂查询，适合深度分析
+
+---
+
+### 三种导出格式对比
+
+| 格式 | 目标工具 | 适合场景 | 上手难度 |
+|------|----------|----------|----------|
+| `--graphml` | Gephi | 可视化探索、做 PPT/汇报图 | ⭐ 最简单 |
+| `--neo4j` | Neo4j | 手动控制导入、导入到远程 | ⭐⭐ |
+| `--neo4j-push` | Neo4j | 有本地 Neo4j，想跳过文件直接导入 | ⭐⭐ |
+
 ## 来源
 
 [[一行命令把杂乱文件变成知识图谱——我的知识库搭建流程]]
