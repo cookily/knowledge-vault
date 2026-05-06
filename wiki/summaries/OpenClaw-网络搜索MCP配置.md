@@ -55,3 +55,10 @@ mcporter call tavily.search query="人工智能最新资讯"
 ## 来源
 
 [[raw/personal/openclaw/openclaw-cn安装网络搜索mcp-已实践.md]]
+
+## 相关方法
+
+**插件方式**（更简单，推荐新手）：
+- 安装：`openclaw-cn plugins install openclaw-tavily`
+- 配置：环境变量 `TAVILY_API_KEY`
+- 参见：[[OpenClaw-Tavily插件安装.md]]

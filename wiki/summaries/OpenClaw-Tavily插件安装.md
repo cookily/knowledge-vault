@@ -43,3 +43,10 @@ openclaw-cn gateway restart
 ## 来源
 
 [[raw/personal/openclaw/openclaw-cn安装网络搜索插件openclaw-tavily安装配置-已实践.md]]
+
+## 相关方法
+
+**手动 MCP 配置**（更复杂但更灵活）：
+- 安装：`npm install -g mcporter`
+- 配置：`mcporter config add tavily "https://mcp.tavily.com/mcp/?tavilyApiKey=xxx"`
+- 参见：[[OpenClaw-网络搜索MCP配置.md]]
