@@ -22,6 +22,14 @@ created: 2026-04-30
 | [[raw/external/网页文章/graphify.md]] | GitHub · safishamsi | #clippings | 将代码/文档/图片转换为知识图谱的 AI 技能，token 消耗降低 71.5 倍 |
 | [[raw/external/微信公众号/Claude Code 神级开发者 9 个 Skills 推荐：别乱装，先装这几类]] | 微信公众号 | #clippings | Claude Code 9 个 Skills 推荐，按开发提效/信息获取/进化蒸馏分类 |
 
+| [[Claude Code、Cursor 和 Codex对比]] | 微信公众号 | #clippings | 三款 AI 编程工具对比分析：终端 vs IDE vs 异步代理，组合使用才是终极答案 |
+| [[Hermes Agent 与 Web UI 可视化界面]] | 微信公众号 | #clippings | Hermes Agent（11万 Star）配 Web UI 可视化界面，高频用户从敲命令变点鼠标 |
+| [[DDD领域驱动设计实战]] | 微信公众号 | #clippings | DDD 落地核心是知道代码放哪层，Cola 架构分层模板实战 |
+| [[graphify知识图谱实战]] | 微信公众号 | #clippings | /graphify 一行命令生成知识图谱，两轮提取（AST + 语义），不需要提前分类 |
+| [[QQBot离线语音识别配置]] | 个人笔记 | #personal | QQBot + sherpa-onnx 离线语音识别配置，实测可用 |
+| [[nvm-Node目录迁移]] | 个人笔记 | #personal | 修改 settings.txt 将 nvm 的 node 版本存储位置从 C 盘迁移到 D 盘 |
+| [[测试编译技能]] | 微信公众号 | #test | /compile 技能测试文件 |
+
 ---
 
 ### 📁 个人笔记
