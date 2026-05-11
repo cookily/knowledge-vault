@@ -32,6 +32,14 @@ created: 2026-04-30
 | [[nvm-Node目录迁移]] | 个人笔记 | #personal | 修改 settings.txt 将 nvm 的 node 版本存储位置从 C 盘迁移到 D 盘 |
 | [[测试编译技能]] | 微信公众号 | #test | /compile 技能测试文件 |
 
+### 2026-05-06
+
+| 文件名 | 来源 | 标签 | 摘要 |
+|--------|------|------|------|
+| [[pddbot-拼多多客服自动回复工具]] | GitHub · zhaoyta | #clippings | 开源拼多多客服自动回复：Playwright + LangGraph + PySide6，本地 SQLite 数据自主可控 |
+| [[Hermes配网关告别模型超时]] | 微信公众号 · 轩少玩AI | #clippings | LiteLLM 网关解决 Hermes 全代理（主/子/压缩）模型超时，组内自动故障转移 |
+| [[Khazix-Skills横纵对比HiClaw与Clawith]] | 微信公众号 · 鸿渐 | #clippings | 横纵分析法对比 HiClaw（基础设施层）vs Clawith（应用层）两种多智能体协作范式 |
+
 ---
 
 ### 📁 个人笔记
@@ -54,7 +62,7 @@ created: 2026-04-30
 
 ## 📊 统计信息
 
-- **总来源数**：8（外部）+ 11（个人）= 19
+- **总来源数**：11（外部）+ 11（个人）= 22
 - **最近添加**：2026-05-06
 - **分类**：按添加日期分组
 

@@ -26,6 +26,12 @@ created: 2026-04-30
 | [[wiki/concepts/Hermes-Agent与WebUI.md]] | #concept #AI-Agent #开源工具 | Hermes Agent + Web UI，可视化 AI Agent 操作 |
 | [[wiki/concepts/DDD领域驱动设计.md]] | #concept #架构设计 #DDD | 领域驱动设计核心：领域=边界，高内聚低耦合 |
 
+### 方法论与研究方法
+
+| 概念 | 标签 | 描述 |
+|------|------|------|
+| [[wiki/concepts/横纵分析法.md]] | #concept #方法论 #竞品分析 | 融合历时-共时分析的结构化竞品研究框架，三步法：纵向→横向→交汇洞察 |
+
 ---
 
 ## 🔗 概念关系图
@@ -58,6 +64,7 @@ created: 2026-04-30
 - [[wiki/concepts/AI编程工具三巨头对比.md]]
 - [[wiki/concepts/Hermes-Agent与WebUI.md]]
 - [[wiki/concepts/DDD领域驱动设计.md]]
+- [[wiki/concepts/横纵分析法.md]]
 
 ---
 
