@@ -6,7 +6,7 @@ created: 2026-04-30
 
 # All Sources - 知识库原始资料索引
 
-> 📁 最后更新：2026-05-06
+> 📁 最后更新：2026-05-18
 > 💡 使用 [[概念/知识库编译流程]] 进行整理
 
 ---
@@ -40,6 +40,19 @@ created: 2026-04-30
 | [[Hermes配网关告别模型超时]] | 微信公众号 · 轩少玩AI | #clippings | LiteLLM 网关解决 Hermes 全代理（主/子/压缩）模型超时，组内自动故障转移 |
 | [[Khazix-Skills横纵对比HiClaw与Clawith]] | 微信公众号 · 鸿渐 | #clippings | 横纵分析法对比 HiClaw（基础设施层）vs Clawith（应用层）两种多智能体协作范式 |
 
+### 2026-05-18
+
+| 文件名 | 来源 | 标签 | 摘要 |
+|--------|------|------|------|
+| [[Hermes Agent 日报 4月23日-30日]] | 微信公众号 | #clippings | 周汇总：GPT-5.5/DeepSeek V4 发布、Kimi K2.6 限免、5 个新插件、Qwen3.5 本地部署 |
+| [[Hermes Agent 日报 5月4日-9日]] | 微信公众号 | #clippings | 周汇总：v0.13.0 Tenacity Release、Kanban 重做、/goal 持久目标、8 P0 安全修复 |
+| [[Hermes Agent 日报 5月11日-18日]] | 微信公众号 | #clippings | 周汇总：v0.14.0 Foundation Release、808提交/165K行代码、PyPI安装/Windows支持/180倍加速 |
+| [[Hermes Agent v0.12.0 Curator Release]] | 微信公众号 | #clippings | The Curator Release：自动整理 Skill 库管家、自我改进四引擎、启动快50% |
+| [[UI-TARS Desktop]] | 微信公众号 · 葱哥 | #clippings | 字节跳动开源：看截图操作电脑，34K stars，不调API不读DOM像真人操控 |
+| [[微信消息发给AI，却存错了地方]] | 微信公众号 · 刀羊 | #clippings | 微信通道 vs 终端上下文差异导致的路由bug，解决方案：显式包含完整上下文 |
+| [[每晚自动反省]] | 微信公众号 · 轩少玩AI | #clippings | 每日凌晨自动巡检揪隐性问题，从"纠错日记"升级为"系统巡检" |
+| [[UI-UX-Pro-Max-Skill设计系统生成]] | 微信公众号 · 硅基观察员Jesse | #clippings | 79.6K stars AI设计引擎：161条行业规则推理，一句话生成完整设计系统 |
+
 ---
 
 ### 📁 个人笔记
@@ -62,8 +75,9 @@ created: 2026-04-30
 
 ## 📊 统计信息
 
-- **总来源数**：11（外部）+ 11（个人）= 22
-- **最近添加**：2026-05-06
+- **总来源数**：19（外部）+ 11（个人）= 30
+- **最近添加**：2026-05-18
+- **本次新增**：7 篇摘要（日报周汇总×3 + 版本发布×1 + 独立文章×4）
 - **分类**：按添加日期分组
 
 ---

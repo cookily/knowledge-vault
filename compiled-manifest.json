@@ -5,112 +5,287 @@
     "raw\\external\\微信公众号\\Claude Code 神级开发者 9 个 Skills 推荐：别乱装，先装这几类.md": {
       "summary": "wiki/summaries/Claude Code 神级开发者 9 个 Skills 推荐.md",
       "hash": "f9a68c7036f2d95d",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\网页文章\\graphify.md": {
       "summary": "wiki/summaries/graphify.md",
       "hash": "322d53189ab67b3a",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\Karpathy 式 AI 知识库搭建指南：让 Claude Code + Obsidian 成为你的第二大脑 1.md": {
       "summary": "wiki/summaries/Karpathy 式 AI 知识库搭建指南.md",
       "hash": "3c0db9e009931683",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\网页文章\\Obsidian × Claudian × Skills：打造真正会“思考”的个人知识库-阿里云开发者社区.md": {
       "summary": "wiki/summaries/Obsidian × Claudian × Skills.md",
       "hash": "7a4e588e658b77e6",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\QQBot-sherpa-onnx-离线语音识别配置.md": {
       "summary": "wiki/summaries/QQBot离线语音识别配置.md",
       "hash": "4c1a1f40d6de2750",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\一行命令把杂乱文件变成知识图谱——我的知识库搭建流程.md": {
       "summary": "wiki/summaries/一行命令把杂乱文件变成知识图谱.md",
       "hash": "89312b2fc7effd74",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\飞书sherpa-onnx离线语音识别配置.md": {
       "summary": "wiki/summaries/飞书sherpa-onnx离线语音识别配置.md",
       "hash": "f3fdde49dfc84957",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\Obsidian 自动化工作流搭建记录.md": {
       "summary": "wiki/summaries/Obsidian-自动化工作流搭建记录.md",
       "hash": "3f9323287459b5cd",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\openclaw-cn安装网络搜索mcp-已实践.md": {
       "summary": "wiki/summaries/OpenClaw-网络搜索MCP配置.md",
       "hash": "312bd76c28902606",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\openclaw-cn安装网络搜索插件openclaw-tavily安装配置-已实践.md": {
       "summary": "wiki/summaries/OpenClaw-Tavily插件安装.md",
       "hash": "9d067e196bf4cdde",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\openclaw局域网nas可以访问配置-已实践.md": {
       "summary": "wiki/summaries/OpenClaw-NAS访问配置.md",
       "hash": "c4b44be1be2f4f7e",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\openclaw召唤子代理报错1008，需要配对问题1008： pairing required.md": {
       "summary": "wiki/summaries/OpenClaw-设备配对.md",
       "hash": "ad24a24631570c0c",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\openclaw卸载.md": {
       "summary": "wiki/summaries/OpenClaw-卸载.md",
       "hash": "d84c88c725b5475c",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\本机访问远端的服务器openclaw.md": {
       "summary": "wiki/summaries/SSH隧道访问OpenClaw.md",
       "hash": "6511569943f35938",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\nvm安装的node改到D盘，默认是在c盘.md": {
       "summary": "wiki/summaries/nvm-Node目录迁移.md",
       "hash": "34a61d75dfe9f440",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\GitHub 11 万 Star 的 AI Agent，终于有 Web 可视化界面了！.md": {
       "summary": "wiki/summaries/Hermes Agent 与 Web UI 可视化界面.md",
       "hash": "96752d88e9cd6fc2",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\Claude Code、Cursor 和 Codex，到底选哪个？.md": {
       "summary": "wiki/summaries/Claude Code vs Cursor vs Codex.md",
       "hash": "22defae3cdc9df6f",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\从Alibaba-Cola到DDD，一线研发对领域驱动的思考.md": {
       "summary": "wiki/summaries/DDD领域驱动设计实战.md",
       "hash": "c89c4a8149631433",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\personal\\openclaw\\硅基流动语音识别接入.md": {
       "summary": "wiki/summaries/OpenClaw-语音识别配置.md",
       "hash": "54bbe822b11948e3",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\github\\zhaoytapddbot.md": {
       "summary": "wiki/summaries/pddbot-拼多多客服自动回复工具.md",
       "hash": "fef89fe278db7821",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\Hermes配网关告别模型超时.md": {
       "summary": "wiki/summaries/Hermes配网关告别模型超时.md",
       "hash": "27680dfee5e8ee6b",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
     },
     "raw\\external\\微信公众号\\使用Khazix-Skills对Hiclaw和clawith进行横纵对比.md": {
       "summary": "wiki/summaries/Khazix-Skills横纵对比HiClaw与Clawith.md",
       "hash": "f7bd9d4d4dd0356c",
-      "compiled_at": "2026-05-11T08:03:56.362111+00:00"
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent v0.12.0 已发布！1分钟速览更新内容.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "614db9aa048bd333",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent v0.13.0 已发布！1分钟速览更新内容.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "19af85f593c4b239",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent v0.14.0 已发布！1分钟速览更新内容 1.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "198f6287b1bcb511",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent v0.14.0 已发布！1分钟速览更新内容 2.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "198f6287b1bcb511",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent v0.14.0 已发布！1分钟速览更新内容.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "198f6287b1bcb511",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月23日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "6e49a549b3a1dcf4",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月24日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "daced1cdb5d35cc0",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月27日 星期一.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "05179500c65eceb1",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月28日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "58fad10e660a2d05",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月29日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "ccff02dd7c749c91",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 4月30日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "6b7aa8b7585dc339",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月11日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "2cb57fbc75c5e61d",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月12日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "5cb2bec447d7f67c",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月13日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "104b95b2eaec88bd",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月14日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "299c6bfe7d451acb",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月15日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "28fa9e852bdd91f5",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月18日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "dc6ab7437a6521ee",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月4日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "48220d2f3f73376c",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月5日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "afefc31598d77446",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月6日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "21e47f1867672901",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月7日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "203cd01368e08f7a",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月8日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "bab96efbc15fccf3",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\Hermes Agent 中文社区日报 5月9日.md": {
+      "summary": "wiki/summaries/Hermes Agent v0.12.0 Curator Release.md",
+      "hash": "ec0d4b06586690bd",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\UI-TARS Desktop 字节跳动开源的看屏幕操作电脑AI Agent.md": {
+      "summary": "wiki/summaries/UI-TARS Desktop.md",
+      "hash": "532a839ca4eec123",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\从'帮我做个网站'到完整设计系统，这Skill把中间10个小时省了.md": {
+      "summary": "wiki/summaries/UI-UX-Pro-Max-Skill设计系统生成.md",
+      "hash": "f42f040d620eee91",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\微信消息发给 AI，却存错了地方：一次 Hermes 路由 debug 实录.md": {
+      "summary": "wiki/summaries/微信消息发给AI，却存错了地方.md",
+      "hash": "edde470a9d480db5",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw\\external\\微信公众号\\每晚自动反省：让你的Hermes加速进化.md": {
+      "summary": "wiki/summaries/每晚自动反省.md",
+      "hash": "228071967fe12aef",
+      "compiled_at": "2026-05-18T08:29:46.650666+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月23日.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "6e49a549b3a1dcf4",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月24日.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "daced1cdb5d35cc0",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月27日 星期一.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "05179500c65eceb1",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月28日.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "58fad10e660a2d05",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月29日.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "ccff02dd7c749c91",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/Hermes Agent 中文社区日报 4月30日.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "6b7aa8b7585dc339",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw/external/微信公众号/推荐几个最近刚发布的 Hermes Agent 小工具.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "8f2ecac645553cb2",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
+    },
+    "raw\\external\\微信公众号\\推荐几个最近刚发布的 Hermes Agent 小工具.md": {
+      "summary": "wiki/summaries/Hermes Agent 日报 4月23日-30日.md",
+      "hash": "8f2ecac645553cb2",
+      "compiled_at": "2026-05-18T00:00:00+00:00"
     }
   }
 }
