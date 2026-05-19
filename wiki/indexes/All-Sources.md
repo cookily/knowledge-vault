@@ -61,6 +61,10 @@ created: 2026-04-30
 | [[ChatLog 企业微信聊天记录导出]] | 微信公众号 · 技术Z先生 | #clippings | 本地聊天记录分析平台：微信/企微/QQ/Telegram，HTTP API+MCP SSE对接AI |
 | [[WeFlow 微信聊天记录浏览器]] | GitHub · hicccc77 | #clippings | 本地微信实时聊天记录工具：消息防撤回/年度报告/群聊画像/朋友圈解密/HTTP API |
 | [[Hermes Agent 中文社区日报 5月19日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | Agent安全风险/跨天记忆持久化/A2A多智能体协作/last30days-cn搜索技能/OpenHuman |
+| [[wx-cli 微信本地数据CLI工具]] | 微信公众号 + GitHub · jackwener | #clippings | Rust CLI让AI Agent直接读取本地微信数据，daemon架构+Agent Skill一键集成 |
+| [[Qwen 3.7 Max Preview 发布]] | 微信公众号 · 量子位 | #clippings | Arena文本榜#13+视觉榜#16双国产第一，Qwen3时代迭代加速至2-3个月 |
+| [[Hermes proxy 订阅转API]] | 微信公众号 · 新智元 | #clippings | hermes proxy一行命令把$20订阅变API，Grok全面接入，OpenClaw 5.18大更新 |
+| [[wechat-decrypt 微信数据库解密工具]] | GitHub · ylytdeng | #clippings | 跨平台微信4.0+企微5.x数据库解密，MCP Server接入Claude，20+工具 |
 
 ---
 
@@ -84,9 +88,9 @@ created: 2026-04-30
 
 ## 📊 统计信息
 
-- **总来源数**：23（外部）+ 11（个人）= 34
+- **总来源数**：27（外部）+ 11（个人）= 38
 - **最近添加**：2026-05-19
-- **本次新增**：1 篇摘要（社区日报×1）
+- **本次新增**：4 篇摘要（微信工具×2 + 模型发布×1 + Hermes 生态×1）
 - **分类**：按添加日期分组
 
 ---
