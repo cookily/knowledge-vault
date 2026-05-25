@@ -6,7 +6,7 @@ created: 2026-04-30
 
 # All Sources - 知识库原始资料索引
 
-> 📁 最后更新：2026-05-19
+> 📁 最后更新：2026-05-21
 > 💡 使用 [[概念/知识库编译流程]] 进行整理
 
 ---
@@ -66,6 +66,35 @@ created: 2026-04-30
 | [[Hermes proxy 订阅转API]] | 微信公众号 · 新智元 | #clippings | hermes proxy一行命令把$20订阅变API，Grok全面接入，OpenClaw 5.18大更新 |
 | [[wechat-decrypt 微信数据库解密工具]] | GitHub · ylytdeng | #clippings | 跨平台微信4.0+企微5.x数据库解密，MCP Server接入Claude，20+工具 |
 
+### 2026-05-20
+
+| 文件名 | 来源 | 标签 | 摘要 |
+|--------|------|------|------|
+| [[Hermes Agent 日报 5月20日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 飞书CLI读写文档/Scrapling反爬库/DeepSeek API 2.5折/Hermes iOS版Beta |
+| [[Codex海外手机号验证解决]] | 微信公众号 · 创造者Ai | #clippings | 开启 ChatGPT 2FA 双重验证减少 Codex 海外手机号验证弹窗 |
+
+### 2026-05-21
+
+| 文件名 | 来源 | 标签 | 摘要 |
+|--------|------|------|------|
+| [[Hermes Agent v0.14.0 Foundation Release]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 基石版本：PyPI安装/Windows原生/启动-19秒/LSP诊断/22消息平台 |
+| [[Hermes Agent v0.13.0 Tenacity Release]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 长程运行版：Kanban重做/goal持久目标/Checkpoints v2/8个P0漏洞 |
+| [[Skill自进化训练框架 skill-evolver]] | 微信公众号 · 腾讯云开发者 | #clippings | 8阶段Loop+三层评测+5维AND门控+Trace诊断，19轮自进化零回滚 |
+| [[Hermes Kanban 多代理看板实战]] | 微信公众号 · AIGClaw | #clippings | SQLite持久化看板，多Agent并行协作，状态机驱动，60秒自动调度 |
+| [[Hermes Agent 生态小工具推荐]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 5个新插件 + skills-manage Skill统一管理 |
+| [[Hermes Agent 日报 5月11日-15日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 社区爆发期：WebUI本地化/Clawke/EchoMind/Team Deploy |
+| [[Hermes Agent 日报 4月24日-29日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | 4月底社区日报汇总 |
+| [[Kiro反代免费接入Claude-Opus]] | 微信公众号 · 智能运维前线 | #clippings | kiro-gateway反代将Kiro免费额度导出为API |
+| [[VSCode Copilot 支持OpenAI兼容接口]] | 知乎 | #clippings | OAI Compatible Provider插件接入任意OpenAI兼容API |
+| [[VSCode ACP Client]] | GitHub · formulahendry | #clippings | VSCode ACP扩展，预置11个Agent |
+| [[硅基流动语音识别接入]] | 个人笔记 | #personal | 硅基流动语音识别接入 OpenClaw |
+| [[万得AIFin Market金融数据接入]] | 微信公众号 · Wind万得 | #clippings | MCP协议接入万得金融数据，一句指令安装投研能力 |
+| [[搭建100%纯血家庭住宅IP代理]] | 网页文章 · 程序员哈利 | #clippings | 真实宽带+FRP内网穿透+Xray VLESS，100%住宅IP出口 |
+| [[Zed编辑器]] | 网页文章 · Zed Industries | #clippings | Rust高性能编辑器，并行AI Agent+原生Git+调试器，83K Stars |
+| [[OpenAI Codex 5月大更新]] | 微信公众号 · 新智元 | #clippings | Appshots读隐藏文本+goal毕业+锁屏远程编程+ChatGPT插件攻入PPT |
+| [[Hermes Agent 日报 5月21日-25日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | Hermes桌面版开源/Maple-OS/MT5量化46%收益/长会话Token优化 |
+| [[逆向AtomCode获取免费API]] | 网页文章 | #clippings | 提取AtomCode免费Lite计划API，供Hermes等工具使用 |
+
 ---
 
 ### 📁 个人笔记
@@ -88,9 +117,9 @@ created: 2026-04-30
 
 ## 📊 统计信息
 
-- **总来源数**：27（外部）+ 11（个人）= 38
-- **最近添加**：2026-05-19
-- **本次新增**：4 篇摘要（微信工具×2 + 模型发布×1 + Hermes 生态×1）
+- **总来源数**：40（外部）+ 12（个人）= 52
+- **最近添加**：2026-05-21
+- **本次新增**：14 篇摘要（Hermes 生态×8 + 版本发布×2 + 技术文章×3 + 个人笔记×1）+ 2 个概念
 - **分类**：按添加日期分组
 
 ---

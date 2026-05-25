@@ -6,7 +6,7 @@ created: 2026-04-30
 
 # All Concepts - 概念索引
 
-> 💡 最后更新：2026-04-30
+> 💡 最后更新：2026-05-21
 > 📚 使用 [[概念/知识库编译流程]] 维护
 
 ---
@@ -25,6 +25,8 @@ created: 2026-04-30
 | [[wiki/concepts/AI编程工具三巨头对比.md]] | #concept #AI编程 #工具对比 | Claude Code、Cursor、Codex 三工具核心能力对比 |
 | [[wiki/concepts/Hermes-Agent与WebUI.md]] | #concept #AI-Agent #开源工具 | Hermes Agent + Web UI，可视化 AI Agent 操作 |
 | [[wiki/concepts/DDD领域驱动设计.md]] | #concept #架构设计 #DDD | 领域驱动设计核心：领域=边界，高内聚低耦合 |
+| [[wiki/concepts/Skill自进化训练框架.md]] | #concept #AI训练 #Skill | 深度学习范式训练Skill：8阶段Loop+三层评测+5维AND门控+Trace诊断 |
+| [[wiki/concepts/Hermes-Kanban多代理看板.md]] | #concept #Hermes #多Agent | SQLite持久化看板，状态机驱动多Agent并行协作 |
 
 ### 方法论与研究方法
 
@@ -45,11 +47,15 @@ created: 2026-04-30
     │     ├── graphify（知识图谱技能）
     │     └── Claude Code Skills（扩展模块）
     │
-    └── 知识库编译流程
-          ├── Ingest（摄入）
-          ├── Compile（编译）
-          ├── Query（查询）
-          └── Lint（维护）
+    ├── 知识库编译流程
+    │     ├── Ingest（摄入）
+    │     ├── Compile（编译）
+    │     ├── Query（查询）
+    │     └── Lint（维护）
+    │
+    └── AI Agent 协作范式
+          ├── Hermes-Kanban（多Agent看板协作）
+          └── Skill自进化训练（自动迭代优化Skill）
 ```
 
 ---
@@ -65,6 +71,8 @@ created: 2026-04-30
 - [[wiki/concepts/Hermes-Agent与WebUI.md]]
 - [[wiki/concepts/DDD领域驱动设计.md]]
 - [[wiki/concepts/横纵分析法.md]]
+- [[wiki/concepts/Skill自进化训练框架.md]]
+- [[wiki/concepts/Hermes-Kanban多代理看板.md]]
 
 ---
 
