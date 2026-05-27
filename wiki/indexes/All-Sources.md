@@ -94,6 +94,8 @@ created: 2026-04-30
 | [[OpenAI Codex 5月大更新]] | 微信公众号 · 新智元 | #clippings | Appshots读隐藏文本+goal毕业+锁屏远程编程+ChatGPT插件攻入PPT |
 | [[Hermes Agent 日报 5月21日-25日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | Hermes桌面版开源/Maple-OS/MT5量化46%收益/长会话Token优化 |
 | [[逆向AtomCode获取免费API]] | 网页文章 | #clippings | 提取AtomCode免费Lite计划API，供Hermes等工具使用 |
+| [[Hermes Agent 日报 5月26日-27日]] | 微信公众号 · 李嘉乐的数字花园 | #clippings | Neo4j知识图谱/EchoMind v1.1.0/字节Eino框架/Claude自动PR |
+| [[AI编程三件套 OpenSpec + Superpowers + Agent Skills]] | 微信公众号 · 前端AI行走 | #clippings | 铁三角工作流：OpenSpec定需求+Superpowers带流程+Agent Skills管纪律 |
 
 ---
 

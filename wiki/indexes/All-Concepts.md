@@ -27,6 +27,7 @@ created: 2026-04-30
 | [[wiki/concepts/DDD领域驱动设计.md]] | #concept #架构设计 #DDD | 领域驱动设计核心：领域=边界，高内聚低耦合 |
 | [[wiki/concepts/Skill自进化训练框架.md]] | #concept #AI训练 #Skill | 深度学习范式训练Skill：8阶段Loop+三层评测+5维AND门控+Trace诊断 |
 | [[wiki/concepts/Hermes-Kanban多代理看板.md]] | #concept #Hermes #多Agent | SQLite持久化看板，状态机驱动多Agent并行协作 |
+| [[wiki/concepts/AI编程三件套工作流.md]] | #concept #AI编程 #工作流 | OpenSpec定需求+Superpowers带流程+Agent Skills管纪律的铁三角 |
 
 ### 方法论与研究方法
 
@@ -55,7 +56,8 @@ created: 2026-04-30
     │
     └── AI Agent 协作范式
           ├── Hermes-Kanban（多Agent看板协作）
-          └── Skill自进化训练（自动迭代优化Skill）
+          ├── Skill自进化训练（自动迭代优化Skill）
+          └── AI编程三件套（OpenSpec+Superpowers+AgentSkills铁三角）
 ```
 
 ---
@@ -73,6 +75,7 @@ created: 2026-04-30
 - [[wiki/concepts/横纵分析法.md]]
 - [[wiki/concepts/Skill自进化训练框架.md]]
 - [[wiki/concepts/Hermes-Kanban多代理看板.md]]
+- [[wiki/concepts/AI编程三件套工作流.md]]
 
 ---
 
