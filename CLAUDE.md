@@ -1,6 +1,10 @@
 # 知识库项目说明
 
-使用 `/compile` 进行编译，详见全局技能 `compile`。
+## 编译技能
+
+# compile
+- **compile** (`.claude/skills/compile.md`) - 将 raw/ 中的原始资料编译成结构化知识库。Trigger: `/compile`
+When the user types `/compile`, invoke the Skill tool with `skill: "compile"` before doing anything else.
 
 ## 本项目特殊规则
 
